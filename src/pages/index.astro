@@ -1,0 +1,986 @@
+---
+import {
+	fetchPodcastEpisodes,
+	formatDate,
+	formatDuration,
+} from "../utils/rss.js";
+
+const episodes = await fetchPodcastEpisodes();
+const latestEpisode = episodes[0] || null;
+
+const socialLinks = {
+	instagram: [
+		{ name: "Podcast", url: "https://instagram.com/axonas_y_z" },
+		{ name: "Dimitris", url: "https://instagram.com/dimitrismarako" },
+		{ name: "Stelios", url: "https://instagram.com/skarab84" },
+	],
+	spotify: "https://open.spotify.com/show/0hQ3PGIIJJ2j6J8vjUiUOY",
+	deezer: "https://www.deezer.com/show/1001351181",
+	applePodcasts: "https://podcasts.apple.com/podcast/id1896652697",
+};
+---
+
+<!DOCTYPE html>
+<html lang="el">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Άξονας Y-Z | Podcast</title>
+		<meta
+			name="description"
+			content="Διαγενεακή φραπεδοσυζήτηση μεταξύ μιας γενιάς Υ και μιας γενιάς Ζ"
+		/>
+		<link rel="icon" type="image/jpeg" href="/axonasyzlogo.jpg" />
+		<meta property="og:image" content="/axonasyzlogo.jpg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<!-- <link
+			href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Saira:ital,wght@0,100..900;1,100..900&display=swap"
+			rel="stylesheet"
+		/> -->
+	</head>
+
+	<header class="header">
+		<nav class="nav">
+			<a href="#home" class="nav-logo">Άξονας Y-Z</a>
+			<ul class="nav-links">
+				<li><a href="#home">Αρχική</a></li>
+				<li><a href="#episodes">Επεισόδια</a></li>
+				<li><a href="#about">Σχετικά</a></li>
+				<li><a href="#listen">Ακούστε</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<main>
+		<section id="home" class="hero">
+			<div class="hero-background"></div>
+			<div class="container hero-content">
+				<div class="hero-text">
+					<!-- <span class="hero-tagline">Όχι το τυπικό σου podcast</span> -->
+					<h1 class="hero-title">
+						Άξονας <span class="highlight">Y-Z</span>
+					</h1>
+					<p class="hero-subtitle">
+						Τους χωρίζουν 20 χρόνια. Τους ένωσε η αδυναμία στην καφεΐνη. Οπότε
+						φτιάξανε μαζί podcast.
+					</p>
+				</div>
+
+				{
+					latestEpisode && (
+						<div class="latest-episode-card">
+							<div class="latest-label">ΝΕΟ ΕΠΕΙΣΟΔΙΟ</div>
+							<h2 class="latest-title">{latestEpisode.title}</h2>
+							<p class="latest-meta">
+								{formatDate(latestEpisode.pubDate)} ·{" "}
+								{formatDuration(latestEpisode.duration)}
+							</p>
+							<div class="audio-player">
+								<audio controls preload="metadata">
+									<source src={latestEpisode.audioUrl} type="audio/mpeg" />
+									Your browser does not support the audio element.
+								</audio>
+							</div>
+							<p class="latest-description">
+								{latestEpisode.description.slice(0, 250)}...
+							</p>
+							<a href="#episodes" class="btn btn-secondary">
+								Δείτε όλα τα επεισόδια →
+							</a>
+						</div>
+					)
+				}
+			</div>
+		</section>
+
+		<section id="about" class="about">
+			<div class="container">
+				<h2 class="section-title">Για το Podcast</h2>
+				<p class="about-text">
+					Ένας <strong>zoomer</strong> και ένας <strong>millennial</strong> συναντιούνται
+					για μια διαγενεακή φραπεδοσυζήτηση. Τι μπορούν να διδαχθούν οι γενιές η
+					μία από την άλλη; Είναι ικανές η εμπειρία της γενιάς Υ και ο δυναμισμός
+					της γενιάς Ζ αν ενωθούν να αλλάξουν το κόσμο; Δεν έχουμε ιδέα, εμείς απλά
+					έναν καφέ μαζί θα πιούμε.
+				</p>
+
+				<div class="hosts">
+					<div class="host-card">
+						<img class="host-image" src="/dimitris.jpg" alt="Δημήτρης" />
+						<div class="host-info">
+							<h3 class="host-name">Δημήτρης</h3>
+							<p class="host-bio">
+								Σπουδάζει πληροφορική, παίζει ποδόσφαιρο και έχει περιέργεια για
+								τα πάντα. Ένας καλός καφές το πρωί του δίνει ενέργεια.
+							</p>
+							<a
+								href="https://instagram.com/dimitrismarako"
+								target="_blank"
+								rel="noopener"
+								class="host-instagram">@dimitrismarako</a
+							>
+						</div>
+					</div>
+
+					<div class="host-card">
+						<img class="host-image" src="/stelios.jpg" alt="Στέλιος" />
+						<div class="host-info">
+							<h3 class="host-name">Στέλιος</h3>
+							<p class="host-bio">
+								Προγραμματιστής, παίζει τέτρις με τα μπαγκάζια της μέσης ηλικίας
+								και ίσως έχει απαντήσεις για τα πάντα. Ή και όχι. Ένας καλός
+								καφές το πρωί τον ηρεμεί.
+							</p>
+							<a
+								href="https://instagram.com/skarab84"
+								target="_blank"
+								rel="noopener"
+								class="host-instagram">@skarab84</a
+							>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="episodes" class="episodes">
+			<div class="container">
+				<h2 class="section-title">Επεισόδια</h2>
+				<div class="episodes-grid" id="episodes-grid">
+					{
+						episodes.map((episode, index) => (
+							<article
+								class="episode-card"
+								data-index={index}
+								style={index >= 6 ? "display: none;" : ""}
+							>
+								<div class="episode-number">
+									{episode.season && episode.episode
+										? `S${episode.season}, EP${episode.episode}`
+										: ``}
+								</div>
+								<h3 class="episode-title">{episode.title}</h3>
+								<p class="episode-meta">
+									{formatDate(episode.pubDate)} ·{" "}
+									{formatDuration(episode.duration)}
+								</p>
+								<p class="episode-description">
+									{episode.description.slice(0, 150)}...
+								</p>
+								<div class="episode-audio">
+									<audio controls preload="none">
+										<source src={episode.audioUrl} type="audio/mpeg" />
+									</audio>
+								</div>
+							</article>
+						))
+					}
+				</div>
+				{
+					episodes.length > 6 && (
+						<div class="load-more-container">
+							<button id="load-more-btn" class="btn btn-primary">
+								Περισσότερα επεισόδια
+							</button>
+						</div>
+					)
+				}
+			</div>
+		</section>
+
+		<section id="listen" class="listen">
+			<div class="container">
+				<h2 class="section-title">Ακούστε μας προσεκτικά</h2>
+				<div class="platforms">
+					<a
+						href={socialLinks.spotify}
+						target="_blank"
+						rel="noopener"
+						class="platform-btn spotify"
+					>
+						<img src="/spotify.png" alt="Spotify" width="20" height="20" />
+						Spotify
+					</a>
+					<a
+						href={socialLinks.deezer}
+						target="_blank"
+						rel="noopener"
+						class="platform-btn deezer"
+					>
+						<img src="/deezer.png" alt="Deezer" width="20" height="20" />
+						Deezer
+					</a>
+					{
+						socialLinks.applePodcasts ? (
+							<a
+								href={socialLinks.applePodcasts}
+								target="_blank"
+								rel="noopener"
+								class="platform-btn apple"
+							>
+								<img
+									src="/applepodcasts.png"
+									alt="Apple Podcasts"
+									width="20"
+									height="20"
+								/>
+								Apple Podcasts
+							</a>
+						) : (
+							<span class="platform-btn apple">
+								<img
+									src="/applepodcasts.png"
+									alt="Apple Podcasts"
+									width="20"
+									height="20"
+								/>
+								Apple Podcasts <span class="soon-tag">Έρχεται</span>
+							</span>
+						)
+					}
+				</div>
+
+				<div class="social-links">
+					<span class="social-label">Follow us:</span>
+					{
+						socialLinks.instagram.map((link) => (
+							<a
+								href={link.url}
+								target="_blank"
+								rel="noopener"
+								class="social-link"
+							>
+								{link.name}
+							</a>
+						))
+					}
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer class="footer">
+		<div class="container">
+			<p>
+				&copy; {new Date().getFullYear()} Άξονας Y-Z. Με αγάπη για την καφεΐνη.
+			</p>
+		</div>
+	</footer>
+	<style>
+		:root {
+			--color-burgundy: #722f37;
+			--color-burgundy-dark: #5a252c;
+			--color-burgundy-light: #8b3a47;
+			--color-grey: #4a4a4a;
+			--color-grey-light: #6b6b6b;
+			--color-grey-dark: #333333;
+			--color-white: #fafafa;
+			--color-white-pure: #ffffff;
+			--color-accent: #8b2942;
+
+			--font-display: "Cardo", Georgia, serif;
+			--font-body: "Saira", -apple-system, BlinkMacSystemFont, sans-serif;
+
+			--space-xs: 0.25rem;
+			--space-sm: 0.5rem;
+			--space-md: 1rem;
+			--space-lg: 1.5rem;
+			--space-xl: 2rem;
+			--space-2xl: 3rem;
+			--space-3xl: 4rem;
+
+			--radius-sm: 4px;
+			--radius-md: 8px;
+			--radius-lg: 16px;
+
+			--shadow-sm: 0 2px 8px rgba(114, 47, 55, 0.08);
+			--shadow-md: 0 4px 16px rgba(114, 47, 55, 0.12);
+			--shadow-lg: 0 8px 32px rgba(114, 47, 55, 0.16);
+		}
+
+		*,
+		*::before,
+		*::after {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		html {
+			scroll-behavior: smooth;
+		}
+
+		body {
+			font-family: var(--font-body);
+			font-size: 16px;
+			line-height: 1.6;
+			color: var(--color-grey);
+			background: var(--color-white);
+			-webkit-font-smoothing: antialiased;
+		}
+
+		.container {
+			width: 100%;
+			max-width: 1100px;
+			margin: 0 auto;
+			padding: 0 var(--space-lg);
+		}
+
+		/* Header */
+		.header {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			z-index: 100;
+			background: rgba(250, 250, 250, 0.92);
+			backdrop-filter: blur(12px);
+			border-bottom: 1px solid rgba(114, 47, 55, 0.08);
+		}
+
+		.nav {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: var(--space-md) var(--space-lg);
+			max-width: 1100px;
+			margin: 0 auto;
+		}
+
+		.nav-logo {
+			font-family: var(--font-display);
+			font-size: 1.5rem;
+			font-weight: 600;
+			color: var(--color-burgundy);
+			text-decoration: none;
+			letter-spacing: -0.02em;
+		}
+
+		.nav-links {
+			display: flex;
+			list-style: none;
+			gap: var(--space-xl);
+		}
+
+		.nav-links a {
+			font-size: 0.875rem;
+			font-weight: 500;
+			color: var(--color-grey);
+			text-decoration: none;
+			position: relative;
+			transition: color 0.2s ease;
+		}
+
+		.nav-links a::after {
+			content: "";
+			position: absolute;
+			bottom: -4px;
+			left: 0;
+			width: 0;
+			height: 2px;
+			background: var(--color-burgundy);
+			transition: width 0.3s ease;
+		}
+
+		.nav-links a:hover {
+			color: var(--color-burgundy);
+		}
+
+		.nav-links a:hover::after {
+			width: 100%;
+		}
+
+		/* Hero Section */
+		.hero {
+			position: relative;
+			min-height: 100vh;
+			display: flex;
+			align-items: center;
+			padding: calc(80px + var(--space-3xl)) 0 var(--space-3xl);
+			overflow: hidden;
+		}
+
+		.hero-background {
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 55%;
+			height: 100%;
+			background: linear-gradient(
+				135deg,
+				rgba(114, 47, 55, 0.03) 0%,
+				rgba(114, 47, 55, 0.08) 50%,
+				rgba(114, 47, 55, 0.03) 100%
+			);
+			clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+		}
+
+		.hero-background::before {
+			content: "";
+			position: absolute;
+			top: 20%;
+			right: 10%;
+			width: 400px;
+			height: 400px;
+			border: 1px solid rgba(114, 47, 55, 0.1);
+			border-radius: 50%;
+			animation: pulse 8s ease-in-out infinite;
+		}
+
+		.hero-background::after {
+			content: "";
+			position: absolute;
+			top: 40%;
+			right: 25%;
+			width: 200px;
+			height: 200px;
+			border: 1px solid rgba(114, 47, 55, 0.08);
+			border-radius: 50%;
+			animation: pulse 8s ease-in-out infinite 2s;
+		}
+
+		@keyframes pulse {
+			0%,
+			100% {
+				transform: scale(1);
+				opacity: 1;
+			}
+			50% {
+				transform: scale(1.05);
+				opacity: 0.7;
+			}
+		}
+
+		.hero-content {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: var(--space-3xl);
+			align-items: center;
+		}
+
+		.hero-text {
+			position: relative;
+		}
+
+		.hero-tagline {
+			display: inline-block;
+			font-size: 0.75rem;
+			font-weight: 600;
+			letter-spacing: 0.15em;
+			text-transform: uppercase;
+			color: var(--color-burgundy);
+			margin-bottom: var(--space-md);
+			position: relative;
+			padding-left: var(--space-lg);
+		}
+
+		.hero-title {
+			font-family: var(--font-display);
+			font-size: clamp(3rem, 6vw, 4.5rem);
+			font-weight: 700;
+			line-height: 1.1;
+			color: var(--color-grey-dark);
+			margin-bottom: var(--space-lg);
+		}
+
+		.hero-title .highlight {
+			color: var(--color-burgundy);
+			position: relative;
+		}
+
+		.hero-subtitle {
+			font-size: 1.125rem;
+			color: var(--color-grey-light);
+			max-width: 400px;
+			line-height: 1.7;
+		}
+
+		.latest-episode-card {
+			background: var(--color-white-pure);
+			border-radius: var(--radius-lg);
+			padding: var(--space-xl);
+			box-shadow: var(--shadow-lg);
+			border: 1px solid rgba(114, 47, 55, 0.06);
+			position: relative;
+		}
+
+		.latest-episode-card::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			height: 4px;
+			background: linear-gradient(
+				90deg,
+				var(--color-burgundy),
+				var(--color-accent)
+			);
+			border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+		}
+
+		.latest-label {
+			display: inline-block;
+			font-size: 0.7rem;
+			font-weight: 600;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			color: var(--color-white-pure);
+			background: var(--color-burgundy);
+			padding: var(--space-xs) var(--space-sm);
+			border-radius: var(--radius-sm);
+			margin-bottom: var(--space-md);
+		}
+
+		.latest-title {
+			font-family: var(--font-display);
+			font-size: 1.5rem;
+			font-weight: 600;
+			color: var(--color-grey-dark);
+			margin-bottom: var(--space-sm);
+			line-height: 1.3;
+		}
+
+		.latest-meta {
+			font-size: 0.8rem;
+			color: var(--color-grey-light);
+			margin-bottom: var(--space-md);
+		}
+
+		.audio-player {
+			margin-bottom: var(--space-md);
+		}
+
+		.audio-player audio {
+			width: 100%;
+			height: 36px;
+			border-radius: var(--radius-md);
+		}
+
+		.audio-player audio::-webkit-media-controls-panel {
+			background: var(--color-white);
+		}
+
+		.latest-description {
+			font-size: 0.875rem;
+			color: var(--color-grey-light);
+			line-height: 1.6;
+			margin-bottom: var(--space-lg);
+		}
+
+		.btn {
+			display: inline-block;
+			font-family: var(--font-body);
+			font-size: 0.875rem;
+			font-weight: 600;
+			text-decoration: none;
+			padding: var(--space-sm) var(--space-md);
+			border-radius: var(--radius-md);
+			transition: all 0.25s ease;
+		}
+
+		.btn-secondary {
+			color: var(--color-burgundy);
+			background: transparent;
+			border: 1px solid var(--color-burgundy);
+		}
+
+		.btn-secondary:hover {
+			background: var(--color-burgundy);
+			color: var(--color-white-pure);
+		}
+
+		.btn-primary {
+			color: var(--color-white-pure);
+			background: var(--color-burgundy);
+			border: none;
+		}
+
+		.btn-primary:hover {
+			background: var(--color-burgundy-dark);
+		}
+
+		.load-more-container {
+			text-align: center;
+			margin-top: var(--space-xl);
+		}
+
+		/* Section Title */
+		.section-title {
+			font-family: var(--font-display);
+			font-size: 2.5rem;
+			font-weight: 600;
+			color: var(--color-grey-dark);
+			margin-bottom: var(--space-xl);
+			text-align: center;
+			position: relative;
+		}
+
+		.section-title::after {
+			content: "";
+			display: block;
+			width: 60px;
+			height: 2px;
+			background: var(--color-burgundy);
+			margin: var(--space-md) auto 0;
+		}
+
+		/* About Section */
+		.about {
+			padding: var(--space-3xl) 0;
+			background: var(--color-white-pure);
+		}
+
+		.about-text {
+			font-size: 1.125rem;
+			line-height: 1.8;
+			color: var(--color-grey);
+			max-width: 800px;
+			margin: 0 auto var(--space-2xl);
+			text-align: center;
+		}
+
+		.about-text strong {
+			color: var(--color-burgundy);
+			font-weight: 600;
+		}
+
+		.hosts {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: var(--space-xl);
+			margin-top: var(--space-2xl);
+		}
+
+		.host-card {
+			display: flex;
+			gap: var(--space-lg);
+			padding: var(--space-xl);
+			background: var(--color-white);
+			border-radius: var(--radius-lg);
+			border: 1px solid rgba(114, 47, 55, 0.08);
+			box-shadow: var(--shadow-sm);
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+		}
+
+		.host-card:hover {
+			transform: translateY(-4px);
+			box-shadow: var(--shadow-md);
+		}
+
+		.host-image {
+			width: 80px;
+			height: 80px;
+			border-radius: 50%;
+			flex-shrink: 0;
+			background: linear-gradient(
+				135deg,
+				var(--color-burgundy-light),
+				var(--color-burgundy)
+			);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-family: var(--font-display);
+			font-size: 1.75rem;
+			font-weight: 600;
+			color: var(--color-white-pure);
+		}
+
+		.host-image.dimitris::before {
+			content: "Δ";
+		}
+
+		.host-image.stelios::before {
+			content: "Σ";
+		}
+
+		.host-info {
+			flex: 1;
+		}
+
+		.host-name {
+			font-family: var(--font-display);
+			font-size: 1.5rem;
+			font-weight: 600;
+			color: var(--color-burgundy);
+			margin-bottom: var(--space-sm);
+		}
+
+		.host-bio {
+			font-size: 0.9rem;
+			color: var(--color-grey);
+			line-height: 1.6;
+			margin-bottom: var(--space-sm);
+		}
+
+		.host-instagram {
+			font-size: 0.8rem;
+			color: var(--color-burgundy);
+			text-decoration: none;
+			font-weight: 500;
+			transition: color 0.2s ease;
+		}
+
+		.host-instagram:hover {
+			color: var(--color-accent);
+		}
+
+		/* Episodes Section */
+		.episodes {
+			padding: var(--space-3xl) 0;
+			background: var(--color-white);
+		}
+
+		.episodes-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+			gap: var(--space-lg);
+		}
+
+		.episode-card {
+			background: var(--color-white-pure);
+			border-radius: var(--radius-lg);
+			padding: var(--space-lg);
+			border: 1px solid rgba(114, 47, 55, 0.08);
+			box-shadow: var(--shadow-sm);
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+		}
+
+		.episode-card:hover {
+			transform: translateY(-4px);
+			box-shadow: var(--shadow-md);
+		}
+
+		.episode-number {
+			font-size: 0.7rem;
+			font-weight: 600;
+			letter-spacing: 0.1em;
+			color: var(--color-burgundy);
+			margin-bottom: var(--space-sm);
+		}
+
+		.episode-title {
+			font-family: var(--font-display);
+			font-size: 1.25rem;
+			font-weight: 600;
+			color: var(--color-grey-dark);
+			margin-bottom: var(--space-sm);
+			line-height: 1.4;
+		}
+
+		.episode-meta {
+			font-size: 0.8rem;
+			color: var(--color-grey-light);
+			margin-bottom: var(--space-md);
+		}
+
+		.episode-description {
+			font-size: 0.875rem;
+			color: var(--color-grey);
+			line-height: 1.6;
+			margin-bottom: var(--space-md);
+		}
+
+		.episode-audio audio {
+			width: 100%;
+			height: 32px;
+			border-radius: var(--radius-sm);
+		}
+
+		/* Listen Section */
+		.listen {
+			padding: var(--space-3xl) 0;
+			background: linear-gradient(
+				180deg,
+				var(--color-white) 0%,
+				rgba(114, 47, 55, 0.03) 100%
+			);
+		}
+
+		.platforms {
+			display: flex;
+			justify-content: center;
+			gap: var(--space-md);
+			flex-wrap: wrap;
+			margin-bottom: var(--space-2xl);
+		}
+
+		.platform-btn {
+			display: inline-flex;
+			align-items: center;
+			gap: var(--space-sm);
+			font-family: var(--font-body);
+			font-size: 0.9rem;
+			font-weight: 600;
+			text-decoration: none;
+			padding: var(--space-md) var(--space-lg);
+			border-radius: var(--radius-md);
+			transition: all 0.25s ease;
+			border: 2px solid transparent;
+		}
+
+		.platform-btn svg {
+			width: 20px;
+			height: 20px;
+		}
+
+		.platform-btn.spotify {
+			background: black;
+			color: white;
+		}
+
+		.platform-btn.spotify:hover {
+			color: #1ed760;
+			transform: translateY(-2px);
+			box-shadow: 0 4px 12px rgba(29, 185, 84, 0.3);
+		}
+
+		.platform-btn.deezer {
+			background: black;
+			color: white;
+		}
+
+		.platform-btn.deezer:hover {
+			color: #ffbd4a;
+			transform: translateY(-2px);
+			box-shadow: 0 4px 12px rgba(254, 170, 45, 0.3);
+		}
+
+		.platform-btn.apple {
+			background: black;
+			color: white;
+		}
+
+		.platform-btn.apple:hover {
+			color: #f059cd;
+			transform: translateY(-2px);
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+		}
+
+		.platform-btn.coming-soon {
+			background: var(--color-grey-light);
+			color: var(--color-white-pure);
+			cursor: default;
+			opacity: 0.8;
+		}
+
+		.platform-btn.coming-soon:hover {
+			transform: none;
+			box-shadow: none;
+		}
+
+		.soon-tag {
+			font-size: 0.7rem;
+			background: var(--color-burgundy);
+			padding: 2px 6px;
+			border-radius: var(--radius-sm);
+			margin-left: var(--space-xs);
+		}
+
+		.social-links {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: var(--space-md);
+			flex-wrap: wrap;
+		}
+
+		.social-label {
+			font-size: 0.875rem;
+			font-weight: 500;
+			color: var(--color-grey-light);
+		}
+
+		.social-link {
+			font-size: 0.875rem;
+			color: var(--color-burgundy);
+			text-decoration: none;
+			font-weight: 500;
+			transition: color 0.2s ease;
+		}
+
+		.social-link:hover {
+			color: var(--color-accent);
+		}
+
+		/* Footer */
+		.footer {
+			padding: var(--space-xl) 0;
+			background: var(--color-grey-dark);
+			color: rgba(255, 255, 255, 0.7);
+			text-align: center;
+		}
+
+		.footer p {
+			font-size: 0.875rem;
+		}
+
+		/* Responsive */
+		@media (max-width: 900px) {
+			.hero-content {
+				grid-template-columns: 1fr;
+				gap: var(--space-2xl);
+			}
+
+			.hero-background {
+				width: 100%;
+				clip-path: none;
+				opacity: 0.5;
+			}
+
+			.hosts {
+				grid-template-columns: 1fr;
+			}
+
+			.episodes-grid {
+				grid-template-columns: 1fr;
+			}
+		}
+
+		@media (max-width: 600px) {
+			.nav-links {
+				display: none;
+			}
+
+			.hero-title {
+				font-size: 2.5rem;
+			}
+
+			.section-title {
+				font-size: 2rem;
+			}
+
+			.platforms {
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.platform-btn {
+				width: 100%;
+				max-width: 280px;
+				justify-content: center;
+			}
+		}
+	</style>
+	<script>
+		const loadMoreBtn = document.getElementById("load-more-btn");
+		const episodeCards = document.querySelectorAll(".episode-card");
+		let visibleCount = 6;
+
+		loadMoreBtn?.addEventListener("click", () => {
+			const toShow = Array.from(episodeCards).slice(
+				visibleCount,
+				visibleCount + 6
+			);
+			toShow.forEach((card) => (card.style.display = "block"));
+			visibleCount += 6;
+			if (visibleCount >= episodeCards.length) {
+				loadMoreBtn.style.display = "none";
+			}
+		});
+	</script>
+
+
+</html>
