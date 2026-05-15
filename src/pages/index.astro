@@ -8,6 +8,8 @@ import {
 const episodes = await fetchPodcastEpisodes();
 const latestEpisode = episodes[0] || null;
 
+const basePath = "/axonas_y_z_website";
+
 const socialLinks = {
 	instagram: [
 		{ name: "Podcast", url: "https://instagram.com/axonas_y_z" },
@@ -30,8 +32,8 @@ const socialLinks = {
 			name="description"
 			content="Διαγενεακή φραπεδοσυζήτηση μεταξύ μιας γενιάς Υ και μιας γενιάς Ζ"
 		/>
-		<link rel="icon" type="image/jpeg" href="/axonasyzlogo.jpg" />
-		<meta property="og:image" content="/axonasyzlogo.jpg" />
+		<link rel="icon" type="image/jpeg" href={`${basePath}/axonasyzlogo.jpg`} />
+		<meta property="og:image" content={`${basePath}/axonasyzlogo.jpg`} />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<!-- <link
@@ -107,7 +109,7 @@ const socialLinks = {
 
 				<div class="hosts">
 					<div class="host-card">
-						<img class="host-image" src="/dimitris.jpg" alt="Δημήτρης" />
+						<img class="host-image" src={`${basePath}/dimitris.jpg`} alt="Δημήτρης" />
 						<div class="host-info">
 							<h3 class="host-name">Δημήτρης</h3>
 							<p class="host-bio">
@@ -124,7 +126,7 @@ const socialLinks = {
 					</div>
 
 					<div class="host-card">
-						<img class="host-image" src="/stelios.jpg" alt="Στέλιος" />
+						<img class="host-image" src={`${basePath}/stelios.jpg`} alt="Στέλιος" />
 						<div class="host-info">
 							<h3 class="host-name">Στέλιος</h3>
 							<p class="host-bio">
@@ -199,7 +201,7 @@ const socialLinks = {
 						rel="noopener"
 						class="platform-btn spotify"
 					>
-						<img src="/spotify.png" alt="Spotify" width="20" height="20" />
+						<img src={`${basePath}/spotify.png`} alt="Spotify" width="20" height="20" />
 						Spotify
 					</a>
 					<a
@@ -208,7 +210,7 @@ const socialLinks = {
 						rel="noopener"
 						class="platform-btn deezer"
 					>
-						<img src="/deezer.png" alt="Deezer" width="20" height="20" />
+						<img src={`${basePath}/deezer.png`} alt="Deezer" width="20" height="20" />
 						Deezer
 					</a>
 					{
@@ -220,7 +222,7 @@ const socialLinks = {
 								class="platform-btn apple"
 							>
 								<img
-									src="/applepodcasts.png"
+									src={`${basePath}/applepodcasts.png`}
 									alt="Apple Podcasts"
 									width="20"
 									height="20"
@@ -230,7 +232,7 @@ const socialLinks = {
 						) : (
 							<span class="platform-btn apple">
 								<img
-									src="/applepodcasts.png"
+									src={`${basePath}/applepodcasts.png`}
 									alt="Apple Podcasts"
 									width="20"
 									height="20"
