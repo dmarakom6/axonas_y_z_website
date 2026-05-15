@@ -9,7 +9,10 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read    # Changed from write (read is enough to checkout)
+      pages: write       # REQUIRED for GitHub Pages deployment
+      id-token: write    # REQUIRED for GitHub Pages deployment
+
     
     steps:
       - name: Checkout
@@ -35,3 +38,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
